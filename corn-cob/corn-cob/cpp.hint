@@ -1,0 +1,2 @@
+#define CORNCOB_API __declspec(dllexport)
+#define CORNCOB_API __declspec(dllimport)

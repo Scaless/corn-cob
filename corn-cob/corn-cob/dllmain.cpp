@@ -30,7 +30,11 @@ int hk_rand() {
 	}
 	static int rng = original_rand();
 	std::stringstream out;
-	out << std::chrono::system_clock::now() << ",RAND," << rng << "," << std::hex << ret_addr << std::dec << "\n";
+	out //<< std::chrono::system_clock::now() 
+		<< ",RAND," 
+		<< std::hex << rng << std::dec << "," 
+		<< std::this_thread::get_id() << ","
+		<< std::hex << ret_addr << std::dec << "\n";
 	async_log(out.str());
 	return rng;
 }
@@ -46,7 +50,11 @@ void hk_srand(unsigned seed) {
 		mov ret_addr, esp
 	}
 
-	out << std::chrono::system_clock::now() << ",SRAND," << seed << "," << std::hex << ret_addr << std::dec << "\n";
+	out //<< std::chrono::system_clock::now() 
+		<< ",SRAND," 
+		<< std::hex << seed << std::dec << "," 
+		<< std::this_thread::get_id() << ","
+		<< std::hex << ret_addr << std::dec << "\n";
 	async_log(out.str());
 }
 
@@ -59,7 +67,11 @@ int hk_oblivion_rng(int new_seed) {
 	}
 
 	std::stringstream out;
-	out << std::chrono::system_clock::now() << ",OBVRAND," << new_seed << "," << std::hex << ret_addr << std::dec << "\n";
+	out //<< std::chrono::system_clock::now()
+		<< ",OBVRAND," 
+		<< std::hex << new_seed << std::dec << ","
+		<< std::this_thread::get_id() << ","
+		<< std::hex << ret_addr << std::dec << "\n";
 	async_log(out.str());
 	//std::ofstream out("test.log", std::ios::app);
 
